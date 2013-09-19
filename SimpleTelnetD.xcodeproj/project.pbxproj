@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59A9C76B85324835AEE60F25 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF97A2AFDB4D4179871E4538 /* libPods.a */; };
 		F1000EE517EB7D4100AA35A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1000EE417EB7D4100AA35A0 /* Foundation.framework */; };
 		F1000EE817EB7D4100AA35A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EE717EB7D4100AA35A0 /* main.m */; };
 		F1000EEC17EB7D4100AA35A0 /* SimpleTelnetD.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1000EEB17EB7D4100AA35A0 /* SimpleTelnetD.1 */; };
+		F1000EF417EB7F7100AA35A0 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EF317EB7F7100AA35A0 /* Server.m */; };
+		F1000EF717EB7FF700AA35A0 /* Handler.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EF617EB7FF700AA35A0 /* Handler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,11 +29,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A35F026C74B94C8EA27F094E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		AF97A2AFDB4D4179871E4538 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1000EE117EB7D4100AA35A0 /* SimpleTelnetD */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SimpleTelnetD; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1000EE417EB7D4100AA35A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1000EE717EB7D4100AA35A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F1000EEA17EB7D4100AA35A0 /* SimpleTelnetD-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimpleTelnetD-Prefix.pch"; sourceTree = "<group>"; };
 		F1000EEB17EB7D4100AA35A0 /* SimpleTelnetD.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SimpleTelnetD.1; sourceTree = "<group>"; };
+		F1000EF217EB7F7100AA35A0 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		F1000EF317EB7F7100AA35A0 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		F1000EF517EB7FF700AA35A0 /* Handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Handler.h; sourceTree = "<group>"; };
+		F1000EF617EB7FF700AA35A0 /* Handler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Handler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1000EE517EB7D4100AA35A0 /* Foundation.framework in Frameworks */,
+				59A9C76B85324835AEE60F25 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +61,7 @@
 				F1000EE617EB7D4100AA35A0 /* SimpleTelnetD */,
 				F1000EE317EB7D4100AA35A0 /* Frameworks */,
 				F1000EE217EB7D4100AA35A0 /* Products */,
+				A35F026C74B94C8EA27F094E /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				F1000EE417EB7D4100AA35A0 /* Foundation.framework */,
+				AF97A2AFDB4D4179871E4538 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -73,6 +85,10 @@
 		F1000EE617EB7D4100AA35A0 /* SimpleTelnetD */ = {
 			isa = PBXGroup;
 			children = (
+				F1000EF217EB7F7100AA35A0 /* Server.h */,
+				F1000EF317EB7F7100AA35A0 /* Server.m */,
+				F1000EF517EB7FF700AA35A0 /* Handler.h */,
+				F1000EF617EB7FF700AA35A0 /* Handler.m */,
 				F1000EE717EB7D4100AA35A0 /* main.m */,
 				F1000EEB17EB7D4100AA35A0 /* SimpleTelnetD.1 */,
 				F1000EE917EB7D4100AA35A0 /* Supporting Files */,
@@ -95,9 +111,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1000EEF17EB7D4100AA35A0 /* Build configuration list for PBXNativeTarget "SimpleTelnetD" */;
 			buildPhases = (
+				D4919DF020DE491F814FEDF4 /* Check Pods Manifest.lock */,
 				F1000EDD17EB7D4100AA35A0 /* Sources */,
 				F1000EDE17EB7D4100AA35A0 /* Frameworks */,
 				F1000EDF17EB7D4100AA35A0 /* CopyFiles */,
+				4C8BCC2D1D6E40BF9AE671AF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,12 +152,47 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4C8BCC2D1D6E40BF9AE671AF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D4919DF020DE491F814FEDF4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F1000EDD17EB7D4100AA35A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F1000EE817EB7D4100AA35A0 /* main.m in Sources */,
+				F1000EF417EB7F7100AA35A0 /* Server.m in Sources */,
+				F1000EF717EB7FF700AA35A0 /* Handler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +260,7 @@
 		};
 		F1000EF017EB7D4100AA35A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A35F026C74B94C8EA27F094E /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleTelnetD/SimpleTelnetD-Prefix.pch";
@@ -216,6 +270,7 @@
 		};
 		F1000EF117EB7D4100AA35A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A35F026C74B94C8EA27F094E /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleTelnetD/SimpleTelnetD-Prefix.pch";
@@ -242,6 +297,7 @@
 				F1000EF117EB7D4100AA35A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

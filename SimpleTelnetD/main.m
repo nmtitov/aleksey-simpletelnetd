@@ -1,21 +1,21 @@
 //
 //  main.m
-//  SimpleTelnetD
+//  telnetServ
 //
-//  Created by Alexey on 19.09.13.
+//  Created by Alexey on 16.09.13.
 //  Copyright (c) 2013 Aleksey. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "Server.h"
 
 int main(int argc, const char * argv[])
 {
-
+    
     @autoreleasepool {
-        
-        // insert code here...
-        NSLog(@"Hello, World!");
-        
+        Server *srv = [[Server alloc] init];
+        NSLog(@"Starting server");
+        [[NSRunLoop currentRunLoop] run];
     }
     return 0;
 }
