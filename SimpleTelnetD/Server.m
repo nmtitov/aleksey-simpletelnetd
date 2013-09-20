@@ -70,6 +70,10 @@ uint16_t const kPort = 8080;
     NSData *welcome = [@"Welcome\r\n" dataUsingEncoding:NSUTF8StringEncoding];
 	
     [newSocket writeData:welcome withTimeout:-1 tag:kAnswer];
+    
+    NSData *availableCommands = [[self.handler getTheListOfCommands] dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [newSocket writeData:availableCommands withTimeout:-1 tag:kAnswer];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag

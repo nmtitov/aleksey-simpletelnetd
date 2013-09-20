@@ -86,19 +86,24 @@ NSString *confFile = @"/etc/simple-telnetd.conf";
 - (NSString *)getTheListOfCommands
 {
     self.fileManager = [NSFileManager defaultManager];
-    if ([self.fileManager fileExistsAtPath:confFile]){
-        NSError *error = nil;
-        NSString *fileData = [NSString stringWithContentsOfFile:confFile encoding:NSUTF8StringEncoding error:&error];
-        self.commands = [fileData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        NSLog(@"The list of commands is");
-        for (NSString *entry in self.commands) {
-            NSLog(@"%@", entry);
-        }
+    NSError *error = nil;
+    if (![self.fileManager fileExistsAtPath:confFile]){
+        NSString *newFileData = @"/bin/ls\r\n/bin/cd";
+        [newFileData writeToFile:confFile atomically:YES encoding:NSUTF8StringEncoding error:&error];
     }
-    if (self.commands){
-        return @"List of commands updated\r\n";
+    NSString *fileData = [NSString stringWithContentsOfFile:confFile encoding:NSUTF8StringEncoding error:&error];
+    self.commands = [fileData componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    NSMutableArray *mutableCommands = [self.commands mutableCopy];
+    if ([[mutableCommands lastObject] isEqualToString:@""]){
+        [mutableCommands removeLastObject];
     }
-    return 0;
+    self.commands = [NSArray arrayWithArray:mutableCommands];
+    NSLog(@"%@", self.commands);
+    NSString *result = @"Available commands:\r\n";
+    for (NSString *entry in self.commands) {
+        result = [result stringByAppendingString:[NSString stringWithFormat:@"%@\r\n", entry]];
+    }
+    return result;
 }
 
 @end
