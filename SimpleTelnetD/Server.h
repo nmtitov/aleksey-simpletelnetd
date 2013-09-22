@@ -16,5 +16,6 @@ uint16_t const kPort;
 
 - (void)stop;
 - (void)start;
++ (id)sharedServer;
 @end
 

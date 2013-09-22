@@ -30,6 +30,19 @@ uint16_t const kPort = 8080;
 
 @implementation Server
 
+static Server *sharedInstance = nil;
+
++(id)sharedServer
+{
+    if (sharedInstance){
+        return sharedInstance;
+    }
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        sharedInstance = [[Server alloc] init];
+    });
+    return sharedInstance;
+}
 - (id)init
 {
     self = [super init];

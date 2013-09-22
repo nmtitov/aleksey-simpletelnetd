@@ -13,7 +13,7 @@ int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
-        Server *srv = [[Server alloc] init];
+        Server *srv = [Server sharedServer];
         [srv start];
         NSLog(@"Starting server");
         [[NSRunLoop currentRunLoop] run];
