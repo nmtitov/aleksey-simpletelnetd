@@ -16,6 +16,4 @@ NSString const *confFile;
             success:(void (^)(NSString *goodNews))successBlock
             failure:(void (^)(NSString *badNews))failureBlock;
 
-- (NSString *)getTheListOfCommands;
-
 @end

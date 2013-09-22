@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CocoaAsyncSocket/AsyncSocket.h>
 
+
 uint16_t const kPort;
 
 @interface Server : NSObject<AsyncSocketDelegate>
 
 - (void)stop;
+- (void)start;
 @end
 

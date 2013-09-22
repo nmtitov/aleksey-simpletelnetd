@@ -14,6 +14,7 @@ int main(int argc, const char * argv[])
     
     @autoreleasepool {
         Server *srv = [[Server alloc] init];
+        [srv start];
         NSLog(@"Starting server");
         [[NSRunLoop currentRunLoop] run];
     }

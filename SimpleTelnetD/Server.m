@@ -9,6 +9,7 @@
 #import "Server.h"
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 #import "Handler.h"
+#import "FileReader.h"
 
 int const kAnswer = 0;
 int const kError = 1;
@@ -18,12 +19,12 @@ float const kExtraTimeOut = 10.0;
 
 uint16_t const kPort = 8080;
 
-
 @interface Server ()
 
-@property (strong, nonatomic) GCDAsyncSocket *listenSocket;
-@property (strong, nonatomic) NSMutableArray *clients;
-@property (strong, nonatomic) Handler *handler;
+@property (nonatomic, strong) GCDAsyncSocket *listenSocket;
+@property (nonatomic, strong) NSMutableArray *clients;
+@property (nonatomic, strong) Handler *handler;
+@property (nonatomic, strong) FileReader *reader;
 
 @end
 
@@ -34,18 +35,22 @@ uint16_t const kPort = 8080;
     self = [super init];
     if (self) {
         self.clients = [[NSMutableArray alloc] init];
-        self.listenSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-        
-        NSError *error = nil;
-        if (![self.listenSocket acceptOnPort:kPort error:&error])
-            {
-            @throw [NSException exceptionWithName:@"Socket error"
-                                           reason:@"Could not create listening socket"
-                                         userInfo:@{@"Error": error}];
-            }
+        self.handler = [[Handler alloc] init];
+        self.reader = [[FileReader alloc] init];
     }
-    self.handler = [[Handler alloc] init];
     return self;
+}
+
+- (void)start
+{
+    self.listenSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    NSError *error = nil;
+    if (![self.listenSocket acceptOnPort:kPort error:&error])
+        {
+        @throw [NSException exceptionWithName:@"Socket error"
+                                       reason:@"Could not create listening socket"
+                                     userInfo:@{@"Error": error}];
+        }
 }
 
 - (void)stop
@@ -71,7 +76,7 @@ uint16_t const kPort = 8080;
 	
     [newSocket writeData:welcome withTimeout:-1 tag:kAnswer];
     
-    NSData *availableCommands = [[self.handler getTheListOfCommands] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *availableCommands = [[self.reader availableCommands] dataUsingEncoding:NSUTF8StringEncoding];
     
     [newSocket writeData:availableCommands withTimeout:-1 tag:kAnswer];
 }
@@ -104,8 +109,7 @@ uint16_t const kPort = 8080;
             }
             
             if ([msg isEqualToString:@"sighup"]){
-                NSString *sighup = [self.handler getTheListOfCommands];
-                NSData *answerData = [sighup dataUsingEncoding:NSUTF8StringEncoding];
+                NSData *answerData = [[self.reader availableCommands] dataUsingEncoding:NSUTF8StringEncoding];
                 [sock writeData:answerData withTimeout:-1 tag:kAnswer];
                 return;
             }
@@ -116,7 +120,6 @@ uint16_t const kPort = 8080;
             } failure:^(NSString *badNews) {
                 NSData *strData = [badNews dataUsingEncoding:NSUTF8StringEncoding];
                 [sock writeData:strData withTimeout:-1 tag:kAnswer];
-                
             }];
             
 		}
