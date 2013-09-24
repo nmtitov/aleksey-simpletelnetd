@@ -1,6 +1,6 @@
 //
 //  Server.m
-//  telnetServ
+//  SimpleTelnetD
 //
 //  Created by Alexey on 16.09.13.
 //  Copyright (c) 2013 Aleksey. All rights reserved.
@@ -13,11 +13,10 @@
 
 int const kAnswer = 0;
 int const kError = 1;
-
 float const kReadTimeOut = 15.0;
 float const kExtraTimeOut = 10.0;
-
 uint16_t const kPort = 8080;
+
 
 @interface Server ()
 
@@ -27,6 +26,7 @@ uint16_t const kPort = 8080;
 @property (nonatomic, strong) FileReader *reader;
 
 @end
+
 
 @implementation Server
 
@@ -43,6 +43,7 @@ static Server *sharedInstance = nil;
     });
     return sharedInstance;
 }
+
 - (id)init
 {
     self = [super init];
@@ -64,6 +65,7 @@ static Server *sharedInstance = nil;
                                        reason:@"Could not create listening socket"
                                      userInfo:@{@"Error": error}];
         }
+    NSLog(@"Starting server");
 }
 
 - (void)stop
@@ -79,6 +81,10 @@ static Server *sharedInstance = nil;
     CFRunLoopStop(CFRunLoopGetCurrent());
 }
 
+- (void)refreshCommands
+{
+    [self.reader commandsArray];
+}
 - (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket
 {
     //Accepting new socket
@@ -89,7 +95,7 @@ static Server *sharedInstance = nil;
 	
     [newSocket writeData:welcome withTimeout:-1 tag:kAnswer];
     
-    NSData *availableCommands = [[self.reader availableCommands] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *availableCommands = [[self.handler availableCommands] dataUsingEncoding:NSUTF8StringEncoding];
     
     [newSocket writeData:availableCommands withTimeout:-1 tag:kAnswer];
 }
@@ -105,36 +111,14 @@ static Server *sharedInstance = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
 		@autoreleasepool {
 			NSData *strData = [data subdataWithRange:NSMakeRange(0, [data length] - 2)];
-			NSString *msg = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
-            
+            NSString *msg = [[NSString alloc] initWithData:strData encoding:NSUTF8StringEncoding];
             NSLog(@"%@", msg);
-            if (!msg){
-                NSLog(@"Error converting received data into UTF-8 String");
-                NSString *errorString = @"Error occured while getting data\r\n";
-                NSData *errorData = [errorString dataUsingEncoding:NSUTF8StringEncoding];
-                [sock writeData:errorData withTimeout:-1 tag:kAnswer];
-                return;
-            }
-            
-            if ([msg isEqualToString:@"quit"]){
-                [self stop];
-                return;
-            }
-            
-            if ([msg isEqualToString:@"sighup"]){
-                NSData *answerData = [[self.reader availableCommands] dataUsingEncoding:NSUTF8StringEncoding];
+            [self.handler handleInput:msg answer:^(NSString *answer) {
+                NSData *answerData = [answer dataUsingEncoding:NSUTF8StringEncoding];
                 [sock writeData:answerData withTimeout:-1 tag:kAnswer];
-                return;
-            }
-            
-            [self.handler handleInput:msg success:^(NSString *goodNews) {
-                NSData *strData = [goodNews dataUsingEncoding:NSUTF8StringEncoding];
-                [sock writeData:strData withTimeout:-1 tag:kAnswer];
-            } failure:^(NSString *badNews) {
-                NSData *strData = [badNews dataUsingEncoding:NSUTF8StringEncoding];
-                [sock writeData:strData withTimeout:-1 tag:kAnswer];
+            } quit:^{
+                [self stop];
             }];
-            
 		}
 	});
 }

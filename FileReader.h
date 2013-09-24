@@ -12,6 +12,4 @@
 
 - (NSArray*)commandsArray;
 
-- (NSString*)availableCommands;
-
 @end

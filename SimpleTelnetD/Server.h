@@ -1,6 +1,6 @@
 //
 //  Server.h
-//  telnetServ
+//  SimpleTelnetD
 //
 //  Created by Alexey on 16.09.13.
 //  Copyright (c) 2013 Aleksey. All rights reserved.
@@ -10,12 +10,11 @@
 #import <CocoaAsyncSocket/AsyncSocket.h>
 
 
-uint16_t const kPort;
-
 @interface Server : NSObject<AsyncSocketDelegate>
 
 - (void)stop;
 - (void)start;
 + (id)sharedServer;
+- (void)refreshCommands;
 @end
 

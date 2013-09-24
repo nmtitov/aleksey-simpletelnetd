@@ -9,15 +9,24 @@
 #import <Foundation/Foundation.h>
 #import "Server.h"
 
+void SignalHandler(int sig) {
+    
+}
+
+
 int main(int argc, const char * argv[])
 {
     
     @autoreleasepool {
         Server *srv = [Server sharedServer];
         [srv start];
-        NSLog(@"Starting server");
+        struct sigaction newSignalAction;
+        memset(&newSignalAction, 0, sizeof(newSignalAction));
+        newSignalAction.sa_handler = &SignalHandler;
+        sigaction(SIGHUP, &newSignalAction, NULL);
         [[NSRunLoop currentRunLoop] run];
     }
     return 0;
 }
+
 

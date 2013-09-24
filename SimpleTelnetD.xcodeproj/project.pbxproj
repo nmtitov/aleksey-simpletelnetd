@@ -10,25 +10,25 @@
 		59A9C76B85324835AEE60F25 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF97A2AFDB4D4179871E4538 /* libPods.a */; };
 		F1000EE517EB7D4100AA35A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1000EE417EB7D4100AA35A0 /* Foundation.framework */; };
 		F1000EE817EB7D4100AA35A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EE717EB7D4100AA35A0 /* main.m */; };
-		F1000EEC17EB7D4100AA35A0 /* SimpleTelnetD.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1000EEB17EB7D4100AA35A0 /* SimpleTelnetD.1 */; };
 		F1000EF417EB7F7100AA35A0 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EF317EB7F7100AA35A0 /* Server.m */; };
 		F1000EF717EB7FF700AA35A0 /* Handler.m in Sources */ = {isa = PBXBuildFile; fileRef = F1000EF617EB7FF700AA35A0 /* Handler.m */; };
-		F116C86517EF5C7F00318DFA /* simple-telnetd.conf in CopyFiles */ = {isa = PBXBuildFile; fileRef = F116C86417EF58FB00318DFA /* simple-telnetd.conf */; };
 		F116C86817EF5D2A00318DFA /* FileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = F116C86717EF5D2A00318DFA /* FileReader.m */; };
 		F116C86B17EF682500318DFA /* CommandRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = F116C86A17EF682500318DFA /* CommandRunner.m */; };
+		F116C86D17F0474B00318DFA /* SimpleTelnetD.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = F1000EEB17EB7D4100AA35A0 /* SimpleTelnetD.1 */; };
+		F116C88217F0716000318DFA /* simple-telnetd.conf in CopyFiles */ = {isa = PBXBuildFile; fileRef = F116C88017F0715A00318DFA /* simple-telnetd.conf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		F1000EDF17EB7D4100AA35A0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
-				F116C86517EF5C7F00318DFA /* simple-telnetd.conf in CopyFiles */,
-				F1000EEC17EB7D4100AA35A0 /* SimpleTelnetD.1 in CopyFiles */,
+				F116C88217F0716000318DFA /* simple-telnetd.conf in CopyFiles */,
+				F116C86D17F0474B00318DFA /* SimpleTelnetD.1 in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -44,11 +44,11 @@
 		F1000EF317EB7F7100AA35A0 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		F1000EF517EB7FF700AA35A0 /* Handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Handler.h; sourceTree = "<group>"; };
 		F1000EF617EB7FF700AA35A0 /* Handler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Handler.m; sourceTree = "<group>"; };
-		F116C86417EF58FB00318DFA /* simple-telnetd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "simple-telnetd.conf"; sourceTree = "<group>"; };
 		F116C86617EF5D2A00318DFA /* FileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileReader.h; path = ../FileReader.h; sourceTree = "<group>"; };
 		F116C86717EF5D2A00318DFA /* FileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileReader.m; path = ../FileReader.m; sourceTree = "<group>"; };
 		F116C86917EF682500318DFA /* CommandRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandRunner.h; sourceTree = "<group>"; };
 		F116C86A17EF682500318DFA /* CommandRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandRunner.m; sourceTree = "<group>"; };
+		F116C88017F0715A00318DFA /* simple-telnetd.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "simple-telnetd.conf"; path = "Resources/simple-telnetd.conf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +67,7 @@
 		F1000ED817EB7D4000AA35A0 = {
 			isa = PBXGroup;
 			children = (
+				F116C88017F0715A00318DFA /* simple-telnetd.conf */,
 				F1000EE617EB7D4100AA35A0 /* SimpleTelnetD */,
 				F1000EE317EB7D4100AA35A0 /* Frameworks */,
 				F1000EE217EB7D4100AA35A0 /* Products */,
@@ -94,7 +95,6 @@
 		F1000EE617EB7D4100AA35A0 /* SimpleTelnetD */ = {
 			isa = PBXGroup;
 			children = (
-				F116C86417EF58FB00318DFA /* simple-telnetd.conf */,
 				F1000EF217EB7F7100AA35A0 /* Server.h */,
 				F1000EF317EB7F7100AA35A0 /* Server.m */,
 				F1000EF517EB7FF700AA35A0 /* Handler.h */,
